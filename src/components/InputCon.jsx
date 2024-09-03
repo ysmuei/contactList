@@ -2,7 +2,12 @@
 import React, { useState } from "react";
 import GroupModal from "./GroupModal";
 
-export default function InputCon({ groups, contactLists, setContactLists }) {
+export default function InputCon({
+  groups,
+  setGroups,
+  contactLists,
+  setContactLists,
+}) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [group, setGroup] = useState("");
@@ -125,7 +130,12 @@ export default function InputCon({ groups, contactLists, setContactLists }) {
         저장
       </button>
       {groupModal && (
-        <GroupModal contactLists={contactLists} setGroupModal={setGroupModal} />
+        <GroupModal
+          contactLists={contactLists}
+          setGroupModal={setGroupModal}
+          setGroups={setGroups}
+          groups={groups}
+        />
       )}
     </form>
   );

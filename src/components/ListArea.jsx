@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
+import DetailModal from "./DetailModal";
 
 export default function ListArea({ contactList, setContactLists }) {
   const [filteredContacts, setFilteredContacts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+
+  const [selectedContact, setSelectedContact] = useState(null);
 
   useEffect(() => {
     if (searchTerm) {
@@ -29,6 +32,13 @@ export default function ListArea({ contactList, setContactLists }) {
     localStorage.setItem("contactList", JSON.stringify(updateList));
   };
 
+  const handleDetailModal = (contact) => {
+    setSelectedContact(contact);
+  };
+  const closeDetailModal = () => {
+    setSelectedContact(null);
+  };
+
   return (
     <div className="listCon">
       <div className="inputCon">
@@ -51,7 +61,12 @@ export default function ListArea({ contactList, setContactLists }) {
                 {contact.name} {contact.phone} {contact.group}
               </p>
               <div className="listBtns">
-                <button>세부사항</button>
+                <button
+                  type="button"
+                  onClick={() => handleDetailModal(contact)}
+                >
+                  세부사항
+                </button>
                 <button onClick={() => removeList(contact)}>삭제</button>
               </div>
             </li>
@@ -60,6 +75,12 @@ export default function ListArea({ contactList, setContactLists }) {
           <p>연락처가 없습니다.</p>
         )}
       </ul>
+      {selectedContact && (
+        <DetailModal
+          contact={selectedContact}
+          closeDetailModal={closeDetailModal}
+        />
+      )}
     </div>
   );
 }

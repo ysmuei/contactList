@@ -1,21 +1,26 @@
 import React, { useState, useEffect } from "react";
 
-export default function GroupModal({ contactLists, setGroupModal }) {
-  const [groupList, setGroupList] = useState([]);
+export default function GroupModal({
+  contactLists,
+  setGroupModal,
+  setGroups,
+  groups,
+}) {
   const [newGroup, setNewGroup] = useState("");
 
   // 로컬 스토리지에서 그룹 리스트를 불러옴
   useEffect(() => {
     const storedGroups = JSON.parse(localStorage.getItem("groups")) || [];
-    setGroupList(storedGroups);
-  }, []);
+    setGroups(storedGroups);
+    console.log(storedGroups);
+  }, [setGroups]);
 
   // 새 그룹 추가
   const addGroup = () => {
     if (!newGroup.trim()) return; // 빈 값은 추가하지 않음
-    if (!groupList.includes(newGroup)) {
-      const updatedGroups = [...groupList, newGroup];
-      setGroupList(updatedGroups);
+    if (!groups.includes(newGroup)) {
+      const updatedGroups = [...groups, newGroup];
+      setGroups(updatedGroups);
       localStorage.setItem("groups", JSON.stringify(updatedGroups));
       setNewGroup("");
     }
@@ -33,8 +38,8 @@ export default function GroupModal({ contactLists, setGroupModal }) {
       return;
     }
 
-    const updatedGroups = groupList.filter((g) => g !== group);
-    setGroupList(updatedGroups);
+    const updatedGroups = groups.filter((g) => g !== group);
+    setGroups(updatedGroups);
     localStorage.setItem("groups", JSON.stringify(updatedGroups));
   };
 
@@ -46,21 +51,22 @@ export default function GroupModal({ contactLists, setGroupModal }) {
       <div className="modal">
         <h2>그룹 관리</h2>
         <ul>
-          {groupList.map((group, index) => (
-            <li className="groupList" key={index}>
+          {groups.map((group, index) => (
+            <li className="groups" key={index}>
               {group}
               <p onClick={() => removeGroup(group)}>X</p>
             </li>
           ))}
         </ul>
-        <div>
+        <div className="groupInputCon">
           <input
+            className="groupInput"
             type="text"
             placeholder="새 그룹 이름"
             value={newGroup}
             onChange={(e) => setNewGroup(e.target.value)}
           />
-          <button type="button" onClick={addGroup}>
+          <button className="groupAddBtn" type="button" onClick={addGroup}>
             추가
           </button>
         </div>

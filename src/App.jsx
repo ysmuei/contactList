@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import "./css/App.css";
-import DetailModal from "./components/DetailModal";
 
 import InputCon from "./components/InputCon";
 import ListArea from "./components/ListArea";
@@ -11,9 +10,10 @@ function App() {
   // 조직리스트
   const [groups, setGroups] = useState(["가족", "친구", "직장", "스터디"]);
 
-  localStorage.setItem("groups", JSON.stringify(groups));
-
-  const [detailModal, setDetailModal] = useState(false);
+  useEffect(() => {
+    const storedgroups = JSON.parse(localStorage.getItem("groups")) || [];
+    setGroups(storedgroups);
+  }, []);
 
   useEffect(() => {
     const storedContacts =
@@ -30,6 +30,7 @@ function App() {
         <section>
           <InputCon
             groups={groups}
+            setGroups={setGroups}
             contactLists={contactLists}
             setContactLists={setContactLists}
           />

@@ -80,6 +80,7 @@
 .nameError,
 .phoneError {
   position: absolute;
+  color: red;
   bottom: -10px;
   right: 10px;
   font-size: 12px;
@@ -153,6 +154,12 @@
   gap: 10px;
 }
 
+.modalCon .modal h2 {
+  font-size: 24px;
+  font-weight: bold;
+  padding: 1rem;
+}
+
 .closeModal {
   position: absolute;
   top: -50px;
@@ -163,11 +170,51 @@
   justify-content: center;
   align-items: center;
   border-radius: 8px;
+  cursor: pointer;
 }
 
-.groupList {
+
+.groups {
   display: flex;
-  width: 200px;
+  border: 1px solid gray;
+  margin-bottom: 5px;
+  width: 230px;
   padding: 0.5rem;
   justify-content: space-between;
+}
+
+.groups p {
+  cursor: pointer;
+}
+
+.modal .groupInputCon {
+  width: 230px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.modal .groupInputCon .groupAddBtn {
+  width: 50px;
+}
+
+.modal .groupInput {
+  width: 150px;
+  padding: 0.5rem;
+}
+
+.detailCloseBtn {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+
+.detailCon p {
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
