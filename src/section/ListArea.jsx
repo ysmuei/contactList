@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import DetailModal from "./DetailModal";
+import DetailModal from "../components/DetailModal";
 
 export default function ListArea({ contactList, setContactLists }) {
   const [filteredContacts, setFilteredContacts] = useState([]);
@@ -46,8 +46,11 @@ export default function ListArea({ contactList, setContactLists }) {
           className="listInput"
           type="text"
           placeholder="검색어를 입력 후 엔터를 누르세요"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onKeyUp={(e) => {
+            if (e.key === "Enter") {
+              setSearchTerm(e.target.value);
+            }
+          }}
         />
         <button className="btn" onClick={handleShowAll}>
           전체리스트 보기

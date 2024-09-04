@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react";
-import "./css/App.css";
+import "./style/App.css";
 
-import InputCon from "./components/InputCon";
-import ListArea from "./components/ListArea";
+import InputCon from "./section/InputCon";
+import ListArea from "./section/ListArea";
 
 function App() {
   // 연락처 리스트.
   const [contactLists, setContactLists] = useState([]);
   // 조직리스트
   const [groups, setGroups] = useState(["가족", "친구", "직장", "스터디"]);
-
   useEffect(() => {
     const storedgroups = JSON.parse(localStorage.getItem("groups")) || [];
     setGroups(storedgroups);
@@ -20,8 +19,6 @@ function App() {
       JSON.parse(localStorage.getItem("contactList")) || [];
     setContactLists(storedContacts);
   }, []);
-
-  console.log(contactLists);
 
   return (
     <main className="main">

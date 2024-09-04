@@ -1,6 +1,6 @@
 // src/components/InputCon.js
 import React, { useState } from "react";
-import GroupModal from "./GroupModal";
+import GroupModal from "../components/GroupModal";
 
 export default function InputCon({
   groups,
@@ -50,6 +50,24 @@ export default function InputCon({
 
     validateName(name);
     validatePhone(phone);
+
+    const isNameDuplicate = contactLists.some(
+      (contact) => contact.name === name
+    );
+    const isPhoneDuplicate = contactLists.some(
+      (contact) => contact.phone === phone
+    );
+
+    if (isNameDuplicate) {
+      alert("이미 존재하는 이름입니다.");
+      return;
+    }
+
+    if (isPhoneDuplicate) {
+      alert("이미 존재하는 전화번호입니다.");
+      return;
+    }
+
     if (!nameError && !phoneError && name && phone) {
       const newContact = { name, phone, group, note };
 

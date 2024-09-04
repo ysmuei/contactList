@@ -16,7 +16,14 @@
 .secCon {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 2rem;
+}
+
+@media (max-width: 900px) {
+  .secCon {
+    flex-direction: column;
+  }
 }
 
 .btn {
